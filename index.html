@@ -7,10 +7,11 @@
   </head>
   <body>
     <script>
-      console.log(decodeURI(window.location.search.slice(1)))
-    	//setTimeout(()=>{
-        //	window.location.href = decodeURI(window.location.search.slice(1));
-        //},5000);
+      window.onload = ()=>{
+    	setTimeout(()=>{
+        	window.location.href = decodeURI(window.location.search.slice(1));
+        },5000);
+      }
     </script>
   </body>
 </html>
