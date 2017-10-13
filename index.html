@@ -10,7 +10,7 @@
     <script>
       window.onload = ()=>{
         var loc = document.createElement('a');
-		loc.href = "http://example.com:3000/pathname/?search=test#hash";
+		loc.href = window.location.search.slice(1);
         
         var uri = {
           spec: loc.href,
