@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
   </head>
   <body>
-    <script src="./index.js" charset="utf-8"></script>
+    <script>
+    	setTimeout(()=>{
+        	window.location.href = decodeURI(window.location.search);
+        },5000);
+    </script>
   </body>
 </html>
