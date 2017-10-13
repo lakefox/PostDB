@@ -6,23 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
   </head>
   <body>
-    <div></div>
-    <script src="https://cdn.rawgit.com/mozilla/readability/b3fde168/Readability.js"></script>
+    <iframe></iframe>
     <script>
-      window.onload = ()=>{
-        var loc = document.createElement('a');
-		loc.href = window.location.search.slice(1);
-        
-        var uri = {
-          spec: loc.href,
-          host: loc.host,
-          prePath: loc.protocol + "//" + loc.host,
-          scheme: loc.protocol.substr(0, loc.protocol.indexOf(":")),
-          pathBase: loc.protocol + "//" + loc.host + loc.pathname.substr(0, loc.pathname.lastIndexOf("/") + 1)
-        };
-        var article = new Readability(uri, document.querySelector("div")).parse();
-        console.log(article)
-      }
+     	document.querySelector("iframe").src = window.location.search.slice(1)
     </script>
   </body>
 </html>
