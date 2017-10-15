@@ -8,7 +8,8 @@ var T = new Twit({
   access_token_secret: "cSBaLjDc8rlGxHwxQ4ZsbRFoxe5sqLOTyY9DsMPh81Wpm"
 });
 var postedUrls = [];
-setInterval(() => {
+setInterval(post, (1000*60*10));
+function post() {
   fetch("https://www.reddit.com/r/Art/top.json").then((resp) => {
     console.log("1");
     return resp.json();
@@ -20,8 +21,21 @@ setInterval(() => {
     var url,title;
     while (notFound) {
       i++;
-      title = posts[i].data.title
-      url = posts[i].data.preview.images[0].source.url;
+      var post = posts[i].data;
+      title = post.title;
+      switch (post.post_hint) {
+				case "image":
+						if (post.url) {
+							url = post.url;
+						}
+						break;
+				case "rich:video":
+						if (post.url.indexOf("https://gfycat.com/") != -1) {
+							url ="https://giant."+post.url.slice(8)+".gif";
+						}
+						break;
+				default: ;
+			}
       if (url) {
         if (postedUrls.indexOf(url) == -1) {
           notFound = false;
@@ -29,7 +43,7 @@ setInterval(() => {
       }
     }
     postedUrls.push(url);
-    console.log(title,url);
+    console.log(title,"\n",url);
     return [title, url];
   }).then((data) => {
     var title = data[0];
@@ -38,8 +52,15 @@ setInterval(() => {
       return res.json();
     }).then((data) => {
       url += data.data.hash;
-      T.post('statuses/update', { status: title+"\n"+url }, function(err, data, response) {});
+      T.post('statuses/update', { status: title+"\n"+url }, function(err, data, response) {
+        if (!err) {
+          console.log("Tweeted");
+        } else {
+          console.log(err);
+        }
+      });
     });
   });
-}, (1000*60*10));
+}
 console.log("Started");
+post();
