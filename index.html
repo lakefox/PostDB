@@ -70,7 +70,7 @@
       }
       if (window.location.hash != "") {
         var img = window.location.hash.slice(1);
-        if (parseInt(img.split("").pop()) > 2) {
+        if (parseInt(img.split("").pop()) == NaN || parseInt(img.split("").pop()) > 2) {
           img += "0";
         }
         document.querySelector("#maincard"+img.split("").pop()).src = "http://bit.ly/"+img.slice(0,img.length-1);
