@@ -92,6 +92,7 @@
             var num = {"jpg": 0,"gif": 0,"png": 0,"mp3": 1,"ogg": 1,"wav": 1,"mp4": 2,"mpg": 2,"webm": 2}[e];
             url += data.data.hash
             window.location.href = url+num.toString();
+            window.location.reload();
           });
       }
       var i = 0;
