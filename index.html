@@ -51,7 +51,7 @@
   </style>
   <body>
     <div class="title">
-      postdb.io | 
+      postdb.io
     </div>
     <div class="main">
       Shorten <span id="word">IMAGE</span> URL <br>
@@ -81,7 +81,7 @@
           return res.text();}).then((a) => {
           a = a.split("/").pop().split(".");
           a.pop()
-          document.querySelector(".title").innerHTML += a.pop();
+          document.querySelector(".title").innerHTML += " | "+a.pop();
         })
       } else {
         document.querySelector(".main").style.display = "inherit";
