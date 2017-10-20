@@ -50,7 +50,7 @@
         }
         document.querySelector("#maincard"+img.split("").pop()).src = "http://bit.ly/"+img.slice(0,img.length-1);
         document.querySelector("#maincard"+img.split("").pop()).style.display = "inherit";
-        fetch(base+"&shortUrl=http%3A%2F%2Fbit.ly%2F"+img+"&format=txt").then((res) => {
+        fetch(base+"&shortUrl=http%3A%2F%2Fbit.ly%2F"+img.slice(0,img.length-1)+"&format=txt").then((res) => {
           return res.text();}).then((a) => {
           a = a.split("/").pop().split(".");
           a.pop()
