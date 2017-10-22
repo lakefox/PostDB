@@ -20,7 +20,7 @@
       left: 50%;
       max-width: 100vw;
       max-height: 90vh;
-      top: 50%;
+      top: 55%;
       transform: translate(-50%,-50%);
       display: none;
     }
@@ -80,8 +80,10 @@
         fetch(baseExpand+"&shortUrl=http%3A%2F%2Fbit.ly%2F"+img.slice(0,img.length-1)+"&format=txt").then((res) => {
           return res.text();}).then((a) => {
           a = a.split("/").pop().split(".");
-          a.pop()
-          document.querySelector(".title").innerHTML += " | "+a.pop();
+          a.pop();
+          var title = a.pop();
+          document.querySelector(".title").innerHTML += " | "+title;
+          document.querySelector("title").innerHTML += " | "+title;
         })
       } else {
         document.querySelector(".main").style.display = "inherit";
