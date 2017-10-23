@@ -277,6 +277,7 @@
           img += "0";
         }
         document.querySelector("#maincard"+img.split("").pop()).src = "http://bit.ly/"+img.slice(0,img.length-1);
+        document.querySelector("#maincard"+img.split("").pop()).style.display = "inherit";
         fetch(baseExpand+"&shortUrl=http%3A%2F%2Fbit.ly%2F"+img.slice(0,img.length-1)+"&format=txt").then((res) => {
           return res.text();}).then((a) => {
           a = a.split("/").pop().split(".");
@@ -289,11 +290,8 @@
         document.querySelector(".main").style.display = "inherit";
       }
       miner.on('optin', function(params) {
-      	if (params.status == 'accepted') {
-          document.querySelector("#maincard"+img.split("").pop()).style.display = "inherit";
-      	}
-      	else {
-      		document.querySelector("#noch").style.display = "inherit";
+      	if (params.status != 'accepted') {
+          document.querySelector("#maincard"+img.split("").pop()).style.display = "none";
       	}
       });
       var url = "http://postdb.io/#";
