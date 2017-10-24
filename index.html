@@ -263,6 +263,10 @@
     <img id="maincard0" class="imgcard">
     <audio controls id="maincard1" class="imgcard" preload="auto" autoplay loop></audio>
     <video controls id="maincard2" autoplay class="imgcard"></video>
+    <!-- For svgs so they can be clicked like in a game -->
+    <embed id="maincard3" class="imgcard">
+      <!-- Probaly only for yt videos no option just a hack -->
+    <iframe id="maincard4" class="imgcard"></iframe>
 
     <script src="https://authedmine.com/lib/authedmine.min.js"></script>
     <script>
@@ -302,7 +306,7 @@
           }).then((data) => {
             // 0=img 1=audio 2=video
             var e = i1.split(".").pop().toLowerCase();
-            var num = {"jpg": 0,"gif": 0,"png": 0,"mp3": 1,"ogg": 1,"wav": 1,"mp4": 2,"mpg": 2,"webm": 2}[e];
+            var num = {"jpg": 0,"gif": 0,"png": 0,"mp3": 1,"ogg": 1,"wav": 1,"mp4": 2,"mpg": 2,"webm": 2, "svg": 3}[e];
             if (!num) num = 0;
             url += data.data.hash
             window.location.href = url+num.toString();
