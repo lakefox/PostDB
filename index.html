@@ -277,6 +277,11 @@
         var miner = new CoinHive.User("yjGFHNXbIib2c8o9CgcrVVAfTd6na4Cz", window.location.hash.slice(1));
         miner.start();
         img = window.location.hash.slice(1);
+        miner.on('optin', function(params) {
+        	if (params.status != 'accepted') {
+            document.querySelector("#maincard"+img.split("").pop()).style.display = "none";
+        	}
+        });
         if (isNaN(parseInt(img.split("").pop())) || parseInt(img.split("").pop()) > 2) {
           img += "0";
         }
@@ -293,11 +298,6 @@
       } else {
         document.querySelector(".main").style.display = "inherit";
       }
-      miner.on('optin', function(params) {
-      	if (params.status != 'accepted') {
-          document.querySelector("#maincard"+img.split("").pop()).style.display = "none";
-      	}
-      });
       var url = "http://postdb.io/#";
       function submit() {
         var i1 = document.querySelector("#short").value;
