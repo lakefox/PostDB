@@ -36,7 +36,7 @@ function submit() {
     }).then((data) => {
       // 0=img 1=audio 2=video
       var e = i1.split(".").pop().toLowerCase();
-      var num = {"jpg": 0,"gif": 0,"png": 0,"mp3": 1,"ogg": 1,"wav": 1,"mp4": 2,"mpg": 2,"webm": 2, "svg": 3}[e];
+      var num = {"jpg": 0,"gif": 0,"png": 0,"jpeg": 0,"mp3": 1,"ogg": 1,"wav": 1,"mp4": 2,"mpg": 2,"webm": 2, "svg": 3}[e];
       if (!num) num = 0;
       url += data.data.hash
       window.location.href = url+num.toString();
