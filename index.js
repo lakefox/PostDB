@@ -14,14 +14,13 @@ if (window.location.hash != "") {
     img += "0";
   }
   fetch(baseExpand+"&shortUrl=http%3A%2F%2Fbit.ly%2F"+img.slice(0,img.length-1)+"&format=txt").then((res) => {
-    return res.text();}).then((a) => {
-      console.log(a);
-    a = a.split("/").pop().split(".");
+    return res.text();}).then((b) => {
+    var a = b.split("/").pop().split(".");
     a.pop();
-    var title = a.pop();
+    var title = a.pop() || "SoundCloud";
     document.querySelector(".title").innerHTML += " | "+title;
     document.querySelector("title").innerHTML += " | "+title;
-    document.querySelector("#maincard"+img.split("").pop()).src = a;
+    document.querySelector("#maincard"+img.split("").pop()).src = b;
     document.querySelector("#maincard"+img.split("").pop()).style.display = "inherit";
   })
 } else {
@@ -36,15 +35,11 @@ function submit() {
   a.href = i1;
   if (a.hostname == "soundcloud.com") {
     fetch("http://soundcloud.com/oembed?format=json&iframe=true&url="+i1).then((res) => {
-      console.log("1");
       return res.json();
     }).then((data) => {
-      console.log("2");
-      console.log(data.html);
       var h = document.createElement("html");
       h.innerHTML = data.html;
       i1 = h.querySelector("iframe").src;
-      console.log(i1);
       num = 4;
       reload();
     });
@@ -52,23 +47,20 @@ function submit() {
     reload();
   }
   function reload() {
-    fetch(base+"&longUrl="+i1+"&format=json").then((res) => {
+    fetch(base+"&longUrl="+encodeURIComponent(i1)+"&format=json").then((res) => {
       return res.json();
     }).then((data) => {
       // 0=img 1=audio 2=video
       var e = i1.split(".").pop().toLowerCase();
-      console.log(e, num);
       num = {"jpg": 0,"gif": 0,"png": 0,"jpeg": 0,"mp3": 1,"ogg": 1,"wav": 1,"mp4": 2,"mpg": 2,"webm": 2, "svg": 3}[e] || num;
-      console.log(num);
       url += data.data.hash+num.toString()
-      console.log(url);
       window.location.href = url;
-      // window.location.reload();
+      window.location.reload();
     });
   }
 }
 var i = 0;
 setInterval(() => {
   i++;
-  document.querySelector("#word").innerHTML = ["IMAGE", "GIF", "AUDIO", "VIDEO"][i%4];
+  document.querySelector("#word").innerHTML = ["IMAGE", "GIF", "AUDIO", "VIDEO", "SOUNDCLOUD"][i%5];
 }, 3000);
