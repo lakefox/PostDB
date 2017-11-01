@@ -10,19 +10,19 @@ if (window.location.hash != "") {
       document.querySelector("#maincard"+img.split("").pop()).style.display = "none";
     }
   });
-  if (isNaN(parseInt(img.split("").pop())) || parseInt(img.split("").pop()) > 3) {
+  if (isNaN(parseInt(img.split("").pop())) || parseInt(img.split("").pop()) > 4) {
     img += "0";
   }
-  console.log(img,img.slice(0,img.length-1));
-  document.querySelector("#maincard"+img.split("").pop()).src = "http://bit.ly/"+img.slice(0,img.length-1);
-  document.querySelector("#maincard"+img.split("").pop()).style.display = "inherit";
   fetch(baseExpand+"&shortUrl=http%3A%2F%2Fbit.ly%2F"+img.slice(0,img.length-1)+"&format=txt").then((res) => {
     return res.text();}).then((a) => {
+      console.log(a);
     a = a.split("/").pop().split(".");
     a.pop();
     var title = a.pop();
     document.querySelector(".title").innerHTML += " | "+title;
     document.querySelector("title").innerHTML += " | "+title;
+    document.querySelector("#maincard"+img.split("").pop()).src = a;
+    document.querySelector("#maincard"+img.split("").pop()).style.display = "inherit";
   })
 } else {
   document.querySelector(".main").style.display = "inherit";
@@ -30,18 +30,42 @@ if (window.location.hash != "") {
 
 var url = "http://postdb.io/#";
 function submit() {
+  var num;
   var i1 = document.querySelector("#short").value;
+  var a = document.createElement("a");
+  a.href = i1;
+  if (a.hostname == "soundcloud.com") {
+    fetch("http://soundcloud.com/oembed?format=json&iframe=true&url="+i1).then((res) => {
+      console.log("1");
+      return res.json();
+    }).then((data) => {
+      console.log("2");
+      console.log(data.html);
+      var h = document.createElement("html");
+      h.innerHTML = data.html;
+      i1 = h.querySelector("iframe").src;
+      console.log(i1);
+      num = 4;
+      reload();
+    });
+  } else {
+    reload();
+  }
+  function reload() {
     fetch(base+"&longUrl="+i1+"&format=json").then((res) => {
       return res.json();
     }).then((data) => {
       // 0=img 1=audio 2=video
       var e = i1.split(".").pop().toLowerCase();
-      var num = {"jpg": 0,"gif": 0,"png": 0,"jpeg": 0,"mp3": 1,"ogg": 1,"wav": 1,"mp4": 2,"mpg": 2,"webm": 2, "svg": 3}[e];
-      if (!num) num = 0;
-      url += data.data.hash
-      window.location.href = url+num.toString();
-      window.location.reload();
+      console.log(e, num);
+      num = {"jpg": 0,"gif": 0,"png": 0,"jpeg": 0,"mp3": 1,"ogg": 1,"wav": 1,"mp4": 2,"mpg": 2,"webm": 2, "svg": 3}[e] || num;
+      console.log(num);
+      url += data.data.hash+num.toString()
+      console.log(url);
+      window.location.href = url;
+      // window.location.reload();
     });
+  }
 }
 var i = 0;
 setInterval(() => {
