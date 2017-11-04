@@ -29,7 +29,7 @@ if (window.location.hash != "") {
 
 var url = "http://postdb.io/#";
 function submit() {
-  var num;
+  var num = undefined;
   var i1 = document.querySelector("#short").value;
   var a = document.createElement("a");
   a.href = i1;
@@ -52,8 +52,13 @@ function submit() {
     }).then((data) => {
       // 0=img 1=audio 2=video
       var e = i1.split(".").pop().toLowerCase();
-      num = {"jpg": 0,"gif": 0,"png": 0,"jpeg": 0,"mp3": 1,"ogg": 1,"wav": 1,"mp4": 2,"mpg": 2,"webm": 2, "svg": 3}[e] || num;
-      url += data.data.hash+num.toString()
+      console.log(num);
+      if (num == undefined) {
+        num = {"jpg": 0,"gif": 0,"png": 0,"jpeg": 0,"mp3": 1,"ogg": 1,"wav": 1,"mp4": 2,"mpg": 2,"webm": 2, "svg": 3}[e];
+        console.log(num);
+      }
+      url += data.data.hash+num.toString();
+      console.log(url);
       window.location.href = url;
       window.location.reload();
     });
