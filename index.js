@@ -15,7 +15,7 @@ if (top.location.hash != "") {
     return res.text();}).then((b) => {
     var a = b.split("/").pop().split(".");
     a.pop();
-    var title = a.pop() || [0,0,0,0,"SoundCloud", "YouTube"][parseInt(b.split("").pop())];
+    var title = a.pop() || [0,0,0,0,"SoundCloud", "YouTube"][parseInt(top.location.href.split("").pop())];
     document.querySelector(".title").innerHTML += " | "+title;
     document.querySelector("title").innerHTML += " | "+title;
     document.querySelector("#maincard"+img.split("").pop()).src = b;
