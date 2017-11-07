@@ -11,9 +11,6 @@ if (top.location.hash != "") {
       document.querySelector("#maincard"+img.split("").pop()).style.display = "none";
     }
   });
-  if (isNaN(parseInt(img.split("").pop())) || parseInt(img.split("").pop()) > 4) {
-    img += "0";
-  }
   fetch(baseExpand+"&shortUrl=http%3A%2F%2Fbit.ly%2F"+img.slice(0,img.length-1)+"&format=txt").then((res) => {
     return res.text();}).then((b) => {
     var a = b.split("/").pop().split(".");
@@ -34,6 +31,7 @@ function submit() {
   var i1 = document.querySelector("#short").value;
   var a = document.createElement("a");
   a.href = i1;
+// NOTE: SOUNDCLOUD
   if (a.hostname == "soundcloud.com") {
     fetch("http://soundcloud.com/oembed?format=json&iframe=true&url="+i1).then((res) => {
       return res.json();
@@ -44,6 +42,12 @@ function submit() {
       num = 4;
       reload();
     });
+// NOTE: YOUTUBE
+  } else if (a.hostname == "www.youtube.com") {
+    i1 = "https://www.youtube-nocookie.com/embed/"+a.href.slice(a.href.indexOf("?v=")+3);
+    num = 5;
+    reload();
+// NOTE: REGULAR
   } else {
     reload();
   }
