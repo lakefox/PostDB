@@ -15,7 +15,7 @@ if (top.location.hash != "") {
     return res.text();}).then((b) => {
     var a = b.split("/").pop().split(".");
     a.pop();
-    var title = a.pop() || "SoundCloud";
+    var title = a.pop() || [0,0,0,0,"SoundCloud", "YouTube"][parseInt(b.split("").pop())];
     document.querySelector(".title").innerHTML += " | "+title;
     document.querySelector("title").innerHTML += " | "+title;
     document.querySelector("#maincard"+img.split("").pop()).src = b;
@@ -72,5 +72,5 @@ function submit() {
 var i = 0;
 setInterval(() => {
   i++;
-  document.querySelector("#word").innerHTML = ["IMAGE", "GIF", "AUDIO", "VIDEO", "SOUNDCLOUD"][i%5];
+  document.querySelector("#word").innerHTML = ["IMAGE", "GIF", "AUDIO", "VIDEO", "SOUNDCLOUD", "YOUTUBE"][i%6];
 }, 3000);
