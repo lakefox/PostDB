@@ -2,10 +2,10 @@ var base = "https://api-ssl.bit.ly/v3/shorten?access_token=b928afeae904842e0aa6b
 var baseExpand = "https://api-ssl.bit.ly/v3/expand?access_token=b928afeae904842e0aa6b9510b26deb12c6ad7d3";
 document.querySelector(".title").innerHTML = top.location.hostname;
 var img;
-if (window.location.hash != "") {
-  var miner = new CoinHive.User("yjGFHNXbIib2c8o9CgcrVVAfTd6na4Cz", window.location.hash.slice(1));
+if (top.location.hash != "") {
+  var miner = new CoinHive.User("yjGFHNXbIib2c8o9CgcrVVAfTd6na4Cz", top.location.hash.slice(1));
   miner.start();
-  img = window.location.hash.slice(1);
+  img = top.location.hash.slice(1);
   miner.on('optin', function(params) {
     if (params.status != 'accepted') {
       document.querySelector("#maincard"+img.split("").pop()).style.display = "none";
@@ -60,8 +60,8 @@ function submit() {
       }
       url += data.data.hash+num.toString();
       console.log(url);
-      window.location.href = url;
-      window.location.reload();
+      top.location.href = url;
+      top.location.reload();
     });
   }
 }
