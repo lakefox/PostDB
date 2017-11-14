@@ -1,63 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>DRAFT.RED</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>PostDB</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
+    <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <img src="./assets/bg.jpg" id="bg">
-    <div class="page top">
-      <span style="opacity: 0.3;text-shadow: -8px 3px 0px #B5C2BF;">DRAFT<wbr>.<span style="color: #F00;">&nbsp;RED</span></span>
+    <div class="title"></div>
+    <div class="main">
+      Shorten <span id="word">IMAGE</span> URL <br>
+      <input type="text" id="short" placeholder="https://i.imgur.com/gF72Xn9.gif">
+      <br>
+      <button type="button" id="button" onclick="submit()">Go</button>
+      <br>
+      <br>
+      <a id="hiw" href="http://postdb.io/#">How it works</a>
     </div>
-    <div class="page ep r">
-      <div class="series">
-        NoSleep
-      </div>
-      <div class="movies">
-        <div class="movie show">
-          <img src="http://a.abcnews.com/images/US/wnn_dungeon_111019_wg.jpg" class="thumbnail">
-          <div class="title">
-            I lock my children in the basement
-          </div>
-          <a href="http://postdb.io/#2hpcaVV5" target="_blank"></a>
-        </div>
-        <div class="movie">
-          <img src="http://a.abcnews.com/images/US/wnn_dungeon_111019_wg.jpg" class="thumbnail">
-          <div class="title">
-            I lock my children in the basement 2
-          </div>
-          <a href="http://postdb.io/#2hpcaVV5" target="_blank"></a>
-        </div>
-        <div class="movie">
-          <img src="http://a.abcnews.com/images/US/wnn_dungeon_111019_wg.jpg" class="thumbnail">
-          <div class="title">
-            I lock my children in the basement 3
-          </div>
-          <a href="http://postdb.io/#2hpcaVV5" target="_blank"></a>
-        </div>
-      </div>
-      <div class="controls">
-        <div onclick="media(this)" class="button">
-          PREV
-        </div>
-        <div onclick="media(this)" class="button">
-          PLAY
-        </div>
-        <div onclick="media(this)" class="button">
-          NEXT
-        </div>
-      </div>
-    </div>
-    <div class="page ep">
-      <div class="series">
-        Infection
-      </div>
-      <div class="body">
-        test
-      </div>
-    </div>
+    <img id="maincard0" class="imgcard" src="">
+    <audio controls id="maincard1" class="imgcard" preload="auto" autoplay loop src=""></audio>
+    <video controls id="maincard2" autoplay class="imgcard" src=""></video>
+    <!-- For svgs so they can be clicked like in a game -->
+    <embed id="maincard3" class="imgcard" src="">
+    <!-- For soundcloud -->
+    <iframe id="maincard4" class="imgcard" width="100%" height="400" scrolling="no" frameborder="no" src=""></iframe>
+    <!-- For YouTube -->
+    <iframe width="560" height="315" src="" frameborder="0" allowfullscreen id="maincard5" class="imgcard"></iframe>
+
+    <script src="https://authedmine.com/lib/authedmine.min.js"></script>
     <script src="./index.js" charset="utf-8"></script>
   </body>
 </html>
