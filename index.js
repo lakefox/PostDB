@@ -21,8 +21,8 @@ if (top.location.hash != "") {
     document.querySelector("#maincard"+img.split("").pop()).src = b;
     document.querySelector("#maincard"+img.split("").pop()).style.display = "inherit";
     if (title == "YouTube") {
-      console.log("Getting title","https://www.googleapis.com/youtube/v3/videos?key=AIzaSyBvPxdka2WlptzDWMp1fIJT1hW-IOqjTeo&part=snippet&id="+b.slice(b.length-11));
-      fetch("https://www.googleapis.com/youtube/v3/videos?key=AIzaSyBvPxdka2WlptzDWMp1fIJT1hW-IOqjTeo&part=snippet&id="+b.slice(b.length-11)).then((res) => {
+      console.log("Getting title","https://www.googleapis.com/youtube/v3/videos?key=AIzaSyBvPxdka2WlptzDWMp1fIJT1hW-IOqjTeo&part=snippet&id="+b.slice(b.length-12));
+      fetch("https://www.googleapis.com/youtube/v3/videos?key=AIzaSyBvPxdka2WlptzDWMp1fIJT1hW-IOqjTeo&part=snippet&id="+b.slice(b.length-12)).then((res) => {
         return res.json();
       }).then((data) => {
         console.log(data);
