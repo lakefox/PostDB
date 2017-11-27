@@ -29,8 +29,19 @@ if (top.location.hash != "") {
         document.querySelector("title").innerHTML = data.items[0].snippet.title;
         document.querySelector(".title").innerHTML = data.items[0].snippet.title;
       });
+    } else if (title == "SoundCloud") {
+      fetch("http://soundcloud.com/oembed?format=json&iframe=true&url="+encodeURIComponent(b)).then((res) => {
+        return res.json();
+      }).then((data) => {
+        var h = document.createElement("html");
+        h.innerHTML = data.html;
+        i1 = h.querySelector("iframe").src;
+        document.querySelector("#maincard"+img.split("").pop()).src = i1;
+        document.querySelector("title").innerHTML = data.title;
+        document.querySelector(".title").innerHTML = data.title;
+      });
     }
-  })
+  });
 } else {
   document.querySelector(".main").style.display = "inherit";
 }
@@ -43,15 +54,8 @@ function submit() {
   a.href = i1;
 // NOTE: SOUNDCLOUD
   if (a.hostname == "soundcloud.com") {
-    fetch("http://soundcloud.com/oembed?format=json&iframe=true&url="+i1).then((res) => {
-      return res.json();
-    }).then((data) => {
-      var h = document.createElement("html");
-      h.innerHTML = data.html;
-      i1 = h.querySelector("iframe").src;
-      num = 4;
-      reload();
-    });
+    num = 4;
+    reload();
 // NOTE: YOUTUBE
   } else if (a.hostname == "www.youtube.com") {
     i1 = "https://www.youtube-nocookie.com/embed/"+a.href.slice(a.href.indexOf("?v=")+3);
