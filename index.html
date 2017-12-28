@@ -7,17 +7,15 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.7.0/introjs.min.css">
   </head>
   <body>
     <div class="title"></div>
-    <div class="main">
+    <div class="main" data-intro="Welcome to postdb">
       Shorten <span id="word">IMAGE</span> URL <br>
-      <input type="text" id="short" placeholder="https://i.imgur.com/gF72Xn9.gif">
+      <input type="text" id="short" placeholder="https://i.imgur.com/gF72Xn9.gif" data-intro="Paste in any link and shorten it automatically">
       <br>
-      <button type="button" id="button" onclick="submit()">Go</button>
-      <br>
-      <br>
-      <a id="hiw" href="http://postdb.io/#">How it works</a>
+      <button type="button" id="button" onclick="submit()" data-intro="When you open the shortened url it will mine XMR on the viewers CPU and will directly pay you! The more people that view the more you make!">Go</button>
     </div>
     <img id="maincard0" class="imgcard" src="">
     <audio controls id="maincard1" class="imgcard" preload="auto" autoplay loop src=""></audio>
@@ -28,8 +26,16 @@
     <iframe id="maincard4" class="imgcard" width="100%" height="400" scrolling="no" frameborder="no" src=""></iframe>
     <!-- For YouTube -->
     <iframe width="560" height="315" src="" frameborder="0" allowfullscreen id="maincard5" class="imgcard"></iframe>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.7.0/intro.min.js" charset="utf-8"></script>
     <script src="https://authedmine.com/lib/authedmine.min.js"></script>
     <script src="./index.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      window.onload = () => {
+        if (!localStorage.hasSeen) {
+          introJs().start();
+          localStorage.hasSeen = true;
+        }
+      }
+    </script>
   </body>
 </html>

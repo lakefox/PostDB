@@ -16,7 +16,7 @@ if (top.location.hash != "") {
     var a = b.split("/").pop().split(".");
     a.pop();
     var title = a.pop() || [0,0,0,0,"SoundCloud", "YouTube"][parseInt(top.location.href.split("").pop())];
-    document.querySelector(".title").innerHTML = title;
+    document.querySelector(".title").innerHTML = "<a href='http://postdb.io/stats/#"+img+"'>"+title+"</a>";
     document.querySelector("title").innerHTML = title;
     document.querySelector("#maincard"+img.split("").pop()).src = b;
     document.querySelector("#maincard"+img.split("").pop()).style.display = "inherit";
@@ -27,7 +27,7 @@ if (top.location.hash != "") {
         console.log(data);
         console.log("Setting title");
         document.querySelector("title").innerHTML = data.items[0].snippet.title;
-        document.querySelector(".title").innerHTML = data.items[0].snippet.title;
+        document.querySelector(".title").innerHTML = "<a href='http://postdb.io/stats/#"+img+"'>"+data.items[0].snippet.title+"</a>";
       });
     } else if (title == "SoundCloud") {
       fetch("http://soundcloud.com/oembed?format=json&iframe=true&url="+encodeURIComponent(b)).then((res) => {
@@ -38,7 +38,7 @@ if (top.location.hash != "") {
         i1 = h.querySelector("iframe").src;
         document.querySelector("#maincard"+img.split("").pop()).src = i1;
         document.querySelector("title").innerHTML = data.title;
-        document.querySelector(".title").innerHTML = data.title;
+        document.querySelector(".title").innerHTML = "<a href='http://postdb.io/stats/#"+img+"'>"+data.title+"</a>";
       });
     }
   });
